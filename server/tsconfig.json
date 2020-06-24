@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "../dist/server",
+    "target": "es2015",
+    "module": "commonjs",
+    "sourceMap": true,
+    "types": []
+  },
+  "include": [
+    "server/**/*.ts"
+  ],
+  "files": [
+    "app.ts"
+  ]
+}

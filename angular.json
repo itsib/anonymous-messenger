@@ -11,24 +11,24 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "front",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/anonymous-messenger",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/front",
+            "index": "front/index.html",
+            "main": "front/main.ts",
+            "polyfills": "front/polyfills.ts",
+            "tsConfig": "front/tsconfig.front.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "front/favicon.ico",
+              "front/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "front/styles.scss"
             ],
             "scripts": []
           },
@@ -36,8 +36,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "front/environments/environment.ts",
+                  "with": "front/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -66,7 +66,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "anonymous-messenger:build"
+            "browserTarget": "anonymous-messenger:build",
+            "port": 4445
           },
           "configurations": {
             "production": {
@@ -83,16 +84,16 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
+            "main": "front/test.ts",
+            "polyfills": "front/polyfills.ts",
+            "tsConfig": "front/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "front/favicon.ico",
+              "front/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "front/styles.scss"
             ],
             "scripts": []
           }
@@ -101,8 +102,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
+              "front/tsconfig.front.json",
+              "front/tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
             "exclude": [
@@ -123,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "anonymous-messenger"
+    }
+  },
+  "defaultProject": "anonymous-messenger",
+  "cli": {
+    "analytics": "fd50b6cb-02c1-4cc8-b1b9-d7d49fc24c53"
+  }
 }
