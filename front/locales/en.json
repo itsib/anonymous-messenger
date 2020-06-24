@@ -1,0 +1,13 @@
+{
+  "common": {
+    "confirm": "Confirm"
+  },
+  "errors": {
+    "required_username": "Please enter your name."
+  },
+  "index": {
+    "choose_your_name": "Choose your name",
+    "enter_to_secret_chat": "Sign in to a secret chat",
+    "sub_text": "This name will be visible to all users who will communicate with you."
+  }
+}

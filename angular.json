@@ -23,12 +23,17 @@
             "polyfills": "front/polyfills.ts",
             "tsConfig": "front/tsconfig.front.json",
             "aot": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/scss"
+              ]
+            },
             "assets": [
-              "front/favicon.ico",
-              "front/assets"
+              "front/assets",
+              "front/locales"
             ],
             "styles": [
-              "front/styles.scss"
+              "front/assets/scss/styles.scss"
             ],
             "scripts": []
           },

@@ -14,5 +14,9 @@
   "include": [
     "front/**/*.spec.ts",
     "front/**/*.d.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
 }
