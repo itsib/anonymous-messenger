@@ -1,0 +1,10 @@
+@import "variables";
+
+header {
+  left: 0;
+  top: 0;
+  right: 0;
+  height: $size-header;
+  display: block;
+  position: absolute;
+}
