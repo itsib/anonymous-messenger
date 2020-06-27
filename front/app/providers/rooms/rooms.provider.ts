@@ -3,7 +3,7 @@ import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
-export class SocketProvider {
+export class RoomsProvider {
 
   private _socket: any;
 

@@ -96,6 +96,24 @@
     }
   }
 
+  .create-room {
+    text-align: right;
+
+    .invite {
+      margin-top: 12px;
+      padding-right: 30px;
+    }
+
+    .arrow {
+
+      img {
+        height: 100px;
+        width: auto;
+        margin-right: 22px;
+      }
+    }
+  }
+
   @include tablet {
     width: $size-left-bar-sm;
 

@@ -1,0 +1,28 @@
+
+button.loading {
+  color: transparent;
+
+  &:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    animation: spinner .8s linear infinite;
+  }
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg)}
+}
+
+@-moz-keyframes spinner {
+  to {transform: rotate(360deg)}
+}

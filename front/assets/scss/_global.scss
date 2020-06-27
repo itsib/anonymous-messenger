@@ -24,3 +24,24 @@ a {
   background-color: $color-fg;
   color: $color-text;
 }
+
+.mat-dialog-container {
+  background: $color-fg;
+}
+
+.mat-menu-panel {
+  min-height: unset !important;
+  background: $color-fg !important;
+  border: 1px solid rgba(gray, .4);
+
+  .mat-menu-content {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    &:not(:empty) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+

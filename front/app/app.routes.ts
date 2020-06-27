@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './services/auth/auth.guard';
 import { ChatComponent } from './view/chat/chat.component';
 import { IndexComponent } from './view/index/index.component';
 

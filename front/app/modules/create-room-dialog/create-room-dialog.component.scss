@@ -1,0 +1,35 @@
+
+
+.modal {
+
+  .modal-title {
+
+  }
+
+  .modal-content {
+
+    .note {
+      margin: 0;
+      color: gray;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+    }
+
+    .room-name-field {
+      width: 100%;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+  }
+
+  .modal-actions {
+    padding-bottom: 20px;
+
+    .cancel {
+      color: gray;
+      font-weight: 300;
+    }
+  }
+}
+

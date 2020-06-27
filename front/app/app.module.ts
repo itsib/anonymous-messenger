@@ -8,9 +8,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { TranslateMessageCompiler } from './common/translate-message-compiler';
-import { SocketProvider } from './providers/socket/socket.provider';
-import { AuthGuard } from './services/auth.guard';
-import { StorageService } from './services/storage.service';
+import { RoomsProvider } from './providers/rooms/rooms.provider';
+import { AuthGuard } from './services/auth/auth.guard';
+import { StorageService } from './services/storage/storage.service';
 import { ChatModule } from './view/chat/chat.module';
 import { IndexModule } from './view/index/index.module';
 
@@ -39,7 +39,7 @@ import { IndexModule } from './view/index/index.module';
   ],
   providers: [
     StorageService,
-    SocketProvider,
+    RoomsProvider,
     AuthGuard
   ],
   bootstrap: [AppComponent]

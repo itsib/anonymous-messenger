@@ -1,10 +1,13 @@
 {
   "common": {
     "confirm": "Confirm",
-    "log_out": "Log Out"
+    "log_out": "Log Out",
+    "create": "Create",
+    "cancel": "Cancel"
   },
   "errors": {
-    "required_username": "Please enter your name."
+    "required_username": "Please enter your name.",
+    "required_room_name": "Please enter room name."
   },
   "index": {
     "choose_your_name": "Choose your name",
@@ -14,6 +17,12 @@
   "chat": {
     "conversations": "Conversations",
     "create_room": "Create a room",
-    "write_message": "Write a message..."
+    "write_message": "Write a message...",
+    "create_private_room_invite": "First, create a private room."
+  },
+  "modals": {
+    "create_private_room": "Create a private room",
+    "create_private_room_note": "The name of the room will be visible to your interlocutors.",
+    "room_name": "Room Name"
   }
 }

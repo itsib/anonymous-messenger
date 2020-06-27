@@ -3,129 +3,16 @@
 <div class="rooms-container" [class.open]="isOpen">
 
   <h4 class="header">
+
     <span>{{ 'chat.conversations' | translate }}</span>
 
-    <a href="javascript: void(0)">{{ 'chat.create_room' | translate }}</a>
+    <a href="javascript: void(0)" (click)="createRoom()">{{ 'chat.create_room' | translate }}</a>
+
   </h4>
 
   <div class="rooms-list">
 
-    <div class="room-item">
-
-      <div class="icon">
-        <mat-icon>account_circle</mat-icon>
-      </div>
-
-      <div class="info">
-        <div class="name">Test chat room</div>
-        <div class="description">Some description test. Long long long</div>
-      </div>
-
-      <div class="options">
-
-        <div class="date">25.07.18</div>
-
-        <button class="menu" mat-icon-button>
-          <mat-icon>more_horiz</mat-icon>
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="room-item">
-
-      <div class="icon">
-        <mat-icon>account_circle</mat-icon>
-      </div>
-
-      <div class="info">
-        <div class="name">Test chat room</div>
-        <div class="description">Some description test. Long long long</div>
-      </div>
-
-      <div class="options">
-
-        <div class="date">25.07.18</div>
-
-        <button class="menu" mat-icon-button>
-          <mat-icon>more_horiz</mat-icon>
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="room-item selected">
-
-      <div class="icon">
-        <mat-icon>account_circle</mat-icon>
-      </div>
-
-      <div class="info">
-        <div class="name">Test chat room</div>
-        <div class="description">Some description test. Long long long</div>
-      </div>
-
-      <div class="options">
-
-        <div class="date">25.07.18</div>
-
-        <button class="menu" mat-icon-button>
-          <mat-icon>more_horiz</mat-icon>
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="room-item">
-
-      <div class="icon">
-        <mat-icon>account_circle</mat-icon>
-      </div>
-
-      <div class="info">
-        <div class="name">Test chat room</div>
-        <div class="description">Some description test. Long long long</div>
-      </div>
-
-      <div class="options">
-
-        <div class="date">25.07.18</div>
-
-        <button class="menu" mat-icon-button>
-          <mat-icon>more_horiz</mat-icon>
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="room-item">
-
-      <div class="icon">
-        <mat-icon>account_circle</mat-icon>
-      </div>
-
-      <div class="info">
-        <div class="name">Test chat room</div>
-        <div class="description">Some description test. Long long long</div>
-      </div>
-
-      <div class="options">
-
-        <div class="date">25.07.18</div>
-
-        <button class="menu" mat-icon-button>
-          <mat-icon>more_horiz</mat-icon>
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="room-item">
+    <div class="room-item selected" *ngIf="false">
 
       <div class="icon">
         <mat-icon>account_circle</mat-icon>
@@ -152,6 +39,14 @@
 
   <div class="create-room">
 
+    <div class="arrow">
+      <img src="assets/images/arrow-up.svg">
+    </div>
+
+    <div class="invite">
+      <span>{{ 'chat.create_private_room_invite' | translate }}</span>
+    </div>
+
   </div>
 
 </div>
@@ -159,7 +54,6 @@
 <div class="common-container" [class.open]="isOpen">
 
   <div class="massages-container">
-
 
     <div class="message">
 

@@ -1,0 +1,35 @@
+
+<form [formGroup]="form" (submit)="createRoom()" class="modal">
+
+  <h1 mat-dialog-title class="modal-title">
+    <span>{{ 'modals.create_private_room' | translate }}</span>
+  </h1>
+
+  <div mat-dialog-content class="modal-content">
+
+    <p class="note">{{ 'modals.create_private_room_note' | translate }}</p>
+
+    <mat-form-field appearance="outline" color="primary" class="room-name-field">
+
+      <mat-label>{{ 'modals.room_name' | translate }}</mat-label>
+
+      <input matInput formControlName="roomName" name="roomName" autofocus>
+
+      <mat-error *ngIf="form.get('roomName').getError('required')">
+        <span>{{ 'errors.required_room_name' | translate }}</span>
+      </mat-error>
+
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-actions class="modal-actions">
+
+    <button mat-button class="create" cdkFocusInitial [class.loading]="form.loading">{{ 'common.create' | translate }}</button>
+
+    <button mat-button class="cancel" (click)="cancel()" type="button">{{ 'common.cancel' | translate }}</button>
+
+  </div>
+
+</form>
+
