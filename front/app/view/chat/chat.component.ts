@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SocketProvider } from '../../providers/socket/socket.provider';
 
 @Component({
@@ -8,9 +9,18 @@ import { SocketProvider } from '../../providers/socket/socket.provider';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private socket: SocketProvider) { }
+  isOpen: boolean;
+
+  form: FormGroup;
+
+  constructor(private socket: SocketProvider) {
+    this.form = new FormGroup({
+      message: new FormControl('', [Validators.required])
+    });
+  }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,0 +1,16 @@
+$hamburger-padding-x                       : 0;
+$hamburger-padding-y                       : 10px;
+$hamburger-layer-width                     : 27px;
+$hamburger-layer-height                    : 3px;
+$hamburger-layer-spacing                   : 6px;
+$hamburger-layer-color                     : white;
+$hamburger-layer-border-radius             : 4px;
+$hamburger-hover-opacity                   : 1;
+$hamburger-hover-transition-duration       : .1s;
+$hamburger-hover-transition-timing-function: linear;
+
+@import "~hamburgers/_sass/hamburgers/hamburgers";
+
+.hamburger {
+  height: 42px;
+}

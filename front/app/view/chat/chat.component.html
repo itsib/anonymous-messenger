@@ -1,1 +1,205 @@
-<app-header></app-header>
+<app-header [(open)]="isOpen"></app-header>
+
+<div class="rooms-container" [class.open]="isOpen">
+
+  <h4 class="header">
+    <span>{{ 'chat.conversations' | translate }}</span>
+
+    <a href="javascript: void(0)">{{ 'chat.create_room' | translate }}</a>
+  </h4>
+
+  <div class="rooms-list">
+
+    <div class="room-item">
+
+      <div class="icon">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+
+      <div class="info">
+        <div class="name">Test chat room</div>
+        <div class="description">Some description test. Long long long</div>
+      </div>
+
+      <div class="options">
+
+        <div class="date">25.07.18</div>
+
+        <button class="menu" mat-icon-button>
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="room-item">
+
+      <div class="icon">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+
+      <div class="info">
+        <div class="name">Test chat room</div>
+        <div class="description">Some description test. Long long long</div>
+      </div>
+
+      <div class="options">
+
+        <div class="date">25.07.18</div>
+
+        <button class="menu" mat-icon-button>
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="room-item selected">
+
+      <div class="icon">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+
+      <div class="info">
+        <div class="name">Test chat room</div>
+        <div class="description">Some description test. Long long long</div>
+      </div>
+
+      <div class="options">
+
+        <div class="date">25.07.18</div>
+
+        <button class="menu" mat-icon-button>
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="room-item">
+
+      <div class="icon">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+
+      <div class="info">
+        <div class="name">Test chat room</div>
+        <div class="description">Some description test. Long long long</div>
+      </div>
+
+      <div class="options">
+
+        <div class="date">25.07.18</div>
+
+        <button class="menu" mat-icon-button>
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="room-item">
+
+      <div class="icon">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+
+      <div class="info">
+        <div class="name">Test chat room</div>
+        <div class="description">Some description test. Long long long</div>
+      </div>
+
+      <div class="options">
+
+        <div class="date">25.07.18</div>
+
+        <button class="menu" mat-icon-button>
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="room-item">
+
+      <div class="icon">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+
+      <div class="info">
+        <div class="name">Test chat room</div>
+        <div class="description">Some description test. Long long long</div>
+      </div>
+
+      <div class="options">
+
+        <div class="date">25.07.18</div>
+
+        <button class="menu" mat-icon-button>
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="create-room">
+
+  </div>
+
+</div>
+
+<div class="common-container" [class.open]="isOpen">
+
+  <div class="massages-container">
+
+
+    <div class="message">
+
+    </div>
+
+  </div>
+
+  <div class="input-container">
+
+    <form class="text-block" [formGroup]="form">
+
+      <textarea autosize
+                [minRows]="1"
+                [maxRows]="8"
+                class="textarea"
+                wrap="hard"
+                formControlName="message"
+                autofocus
+                [placeholder]="'chat.write_message' | translate"></textarea>
+
+      <div class="options">
+
+        <button mat-button>
+          <mat-icon>sentiment_satisfied_alt</mat-icon>
+        </button>
+
+        <div class="separator"></div>
+
+        <button mat-button>
+          <mat-icon>attach_file</mat-icon>
+        </button>
+
+        <button mat-button color="primary" [disabled]="form.invalid">
+          <mat-icon>send</mat-icon>
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

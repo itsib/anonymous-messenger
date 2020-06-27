@@ -11,6 +11,15 @@ body {
   color: $color-text;
 }
 
+a {
+  color: $color-primary;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .mat-card {
   background-color: $color-fg;
   color: $color-text;

@@ -1,6 +1,7 @@
 {
   "common": {
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "log_out": "Log Out"
   },
   "errors": {
     "required_username": "Please enter your name."
@@ -9,5 +10,10 @@
     "choose_your_name": "Choose your name",
     "enter_to_secret_chat": "Sign in to a secret chat",
     "sub_text": "This name will be visible to all users who will communicate with you."
+  },
+  "chat": {
+    "conversations": "Conversations",
+    "create_room": "Create a room",
+    "write_message": "Write a message..."
   }
 }

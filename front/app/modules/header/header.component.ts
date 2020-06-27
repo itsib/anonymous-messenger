@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 
 @Component({
@@ -6,11 +6,19 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+
+  @Input() open: boolean;
+
+  @Output() openChange = new EventEmitter();
 
   constructor(public storage: StorageService) { }
 
-  ngOnInit(): void {
+  /**
+   * Hamburger click handler
+   */
+  hamburger(): void {
+    this.open = !this.open;
+    this.openChange.emit(this.open);
   }
-
 }

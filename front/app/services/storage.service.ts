@@ -11,19 +11,19 @@ export class StorageService {
    * Get saved user model
    */
   getUser(): User {
-    const name = localStorage.getItem('chat-user-name');
-    const id = localStorage.getItem('chat-user-id');
-
-    if (id) {
-      return { id, name };
+    const userJson = localStorage.getItem('chat-user');
+    if (userJson) {
+      try {
+        return JSON.parse(userJson);
+      } catch (e) {}
     }
+    return null;
   }
 
   /**
    * Save user model to local storage
    */
   setUser(user: User): void {
-    localStorage.setItem('chat-user-name', user.name);
-    localStorage.setItem('chat-user-id', user.id);
+    localStorage.setItem('chat-user', JSON.stringify(user));
   }
 }

@@ -1,10 +1,83 @@
 @import "variables";
+@import "mixins";
 
 header {
   left: 0;
   top: 0;
   right: 0;
   height: $size-header;
+  background-color: $color-fg;
   display: block;
   position: absolute;
+
+  .container {
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .mobile-menu {
+      display: none;
+
+      .hamburger {
+        outline: none;
+      }
+    }
+
+    .logo {
+      height: 34px;
+
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .name {
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: .6px;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        margin-left: 15px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        mat-icon {
+          font-size: 40px;
+          display: block;
+        }
+      }
+    }
+  }
+
+  @include mobile {
+
+    .container {
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .logo {
+        display: none;
+      }
+
+      .user {
+
+        .name {
+          display: none;
+        }
+      }
+    }
+  }
 }

@@ -1,4 +1,36 @@
 <header>
 
+  <div class="container">
+
+    <div class="mobile-menu">
+      <button class="hamburger hamburger--elastic" [class.is-active]="open" (click)="hamburger()">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </div>
+
+    <div class="logo">
+      <img src="assets/images/icons/logo.png">
+    </div>
+
+    <div class="user" [matMenuTriggerFor]="userMenu">
+
+      <span class="name">{{ storage.getUser()?.name }}</span>
+
+      <div class="avatar">
+        <mat-icon aria-hidden="false" aria-label="User menu">account_circle</mat-icon>
+      </div>
+
+    </div>
+
+  </div>
 
 </header>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon>
+    <span>{{ 'common.log_out' | translate }}</span>
+  </button>
+</mat-menu>

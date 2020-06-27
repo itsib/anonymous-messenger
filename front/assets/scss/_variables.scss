@@ -1,9 +1,14 @@
+@import '~@angular/material/theming';
 
 $color-bg: #1d2437;
 $color-fg: #222a3f;
-$color-primary: #f1558a;
+$color-primary: map-get($mat-deep-orange, 800);
 $color-text: #e9ebf1;
 
 
 $size-header: 65px;
 $size-footer: 65px;
+$size-left-bar: 380px;
+$size-left-bar-sm: 280px;
+$size-bottom-bar: 160px;
+$size-bottom-bar-sm: 100px;

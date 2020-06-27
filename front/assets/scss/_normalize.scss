@@ -398,3 +398,9 @@ td,
 th {
   padding: 0;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
