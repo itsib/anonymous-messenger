@@ -52,7 +52,8 @@ import { IndexModule } from './view/index/index.module';
       provide: RECAPTCHA_SETTINGS,
       useValue: {
         siteKey: environment.reCaptchaKey,
-        size: 'invisible'
+        size: 'invisible',
+        theme: 'dark'
       }
     },
     {

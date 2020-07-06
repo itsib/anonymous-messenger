@@ -23,6 +23,9 @@
         <mat-error *ngIf="form.get('login').getError('required')">
           <span>{{ 'errors.required_login' | translate }}</span>
         </mat-error>
+        <mat-error *ngIf="form.get('login').getError('api') as err">
+          <span>{{ err['msg'] | translate }}</span>
+        </mat-error>
 
       </mat-form-field>
 
@@ -42,6 +45,12 @@
 
         <mat-error *ngIf="form.get('password').getError('required')">
           <span>{{ 'errors.required_password' | translate }}</span>
+        </mat-error>
+        <mat-error *ngIf="form.get('password').getError('api') as err">
+          <span>{{ err['msg'] | translate }}</span>
+        </mat-error>
+        <mat-error *ngIf="form.getError('api') as err">
+          <span>{{ err['msg'] | translate }}</span>
         </mat-error>
 
       </mat-form-field>
@@ -87,6 +96,9 @@
         <mat-error *ngIf="form.get('login').getError('required')">
           <span>{{ 'errors.required_login' | translate }}</span>
         </mat-error>
+        <mat-error *ngIf="form.get('login').getError('api') as err">
+          <span>{{ err['msg'] | translate }}</span>
+        </mat-error>
 
       </mat-form-field>
 
@@ -106,6 +118,12 @@
 
         <mat-error *ngIf="form.get('password').getError('required')">
           <span>{{ 'errors.required_password' | translate }}</span>
+        </mat-error>
+        <mat-error *ngIf="form.get('password').getError('api') as err">
+          <span>{{ err['msg'] | translate }}</span>
+        </mat-error>
+        <mat-error *ngIf="form.getError('api') as err">
+          <span>{{ err['msg'] | translate }}</span>
         </mat-error>
 
       </mat-form-field>

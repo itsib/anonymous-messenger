@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Credentials } from '@types';
+import { ApiError, Credentials } from '@types';
 import { RecaptchaComponent } from 'ng-recaptcha';
+import { fillFormErrors } from '../../common/fill-form-errors';
 import { UserProvider } from '../../providers/user/user.provider';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -48,13 +49,12 @@ export class IndexComponent {
    * Login user
    */
   submit(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.form.loading) {
       this.form.markAllAsTouched();
       return;
     }
 
     this.form.loading = true;
-
     this.reCaptcha.execute();
   }
 
@@ -62,16 +62,22 @@ export class IndexComponent {
    * Re-captcha resolved
    */
   resolved(code: string): void {
+    if (!code) {
+      return;
+    }
     const credentials: Credentials = this.form.value;
     credentials.reCaptcha = code;
 
     (this.activeForm === 'login' ? this.userProvider.login(credentials) : this.userProvider.register(credentials))
       .subscribe(
         ({ token }) => {
-          debugger;
+          this.auth.login(token);
+          this.router.navigate(['/chat']);
         },
-        err => {
-          debugger;
+        (err: ApiError) => {
+          fillFormErrors(this.form, err);
+          this.reCaptcha.reset();
+          this.form.loading = false;
         }
       );
   }

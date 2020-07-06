@@ -8,7 +8,13 @@
   "errors": {
     "required_login": "Please enter your Login.",
     "required_password": "Please enter your Password.",
-    "required_room_name": "Please enter room name."
+    "required_room_name": "Please enter room name.",
+    "invalid_re_captcha": "Invalid Re-Captcha token.",
+    "internal_error": "Internal server error, sorry.",
+    "validation_failed": "Form validation failed.",
+    "login_already_exist": "Use with this name already exists, select a different name",
+    "invalid_password_or_login": "Wrong login or password",
+    "password_is_short": "The password is too short and must contain at least 6 characters"
   },
   "index": {
     "login": "Login",
