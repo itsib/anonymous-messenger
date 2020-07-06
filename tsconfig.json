@@ -12,7 +12,7 @@
     "target": "es2015",
     "paths": {
       "@types": [
-        "types/index"
+        "front/types/index"
       ]
     },
     "lib": [

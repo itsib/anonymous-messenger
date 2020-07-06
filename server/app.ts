@@ -1,27 +1,46 @@
 import * as express from 'express';
 import { Server } from 'http';
-import { Socket } from 'socket.io';
-import * as socketio from 'socket.io';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import * as dotenv from 'dotenv';
+import * as mongoose from 'mongoose';
+import * as socketio from 'socket.io';
+import { config } from './config';
+import { routes } from './routes/routes';
+import { connectionHandler } from './socket/socket';
+import * as bodyParser from 'body-parser';
 
-dotenv.config();
-
-const PORT = process.env.PORT || 4444;
-const FRONT_URL = process.env.FRONT_URL || 'http://localhost:4445';
 const app = express();
 
-if (process.env.NODE_ENV !== 'production') {
-  app.use('/', createProxyMiddleware({target: FRONT_URL, changeOrigin: true, ws: true}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+// Add api routes
+app.use('/api', routes);
+
+if (config.nodeEnv !== 'production') {
+  app.use('/', createProxyMiddleware(pathname => !/^\/socket/.test(pathname), {
+    target: config.frontUrl,
+    changeOrigin: true,
+    logLevel: 'error',
+    ws: true,
+  }));
 } else {
   app.use('/', express.static('../front'));
 }
 
-const server: Server = app.listen(PORT, () => {
-  console.log(`Server is running in http://localhost:${PORT}`);
-});
-const io: socketio.Server = socketio(server);
+// Connect to database
+mongoose.connect(config.dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+  if (err) {
+    return console.log(err);
+  }
 
-io.on('connection', (socket: Socket) => {
-  console.log('Socket connected');
+  console.log('Mongo is connected...');
+
+  const server: Server = app.listen(config.port, () => {
+    console.log(`Server is running in http://localhost:${config.port}`);
+  });
+  const io: socketio.Server = socketio(server, { path: '/socket' });
+
+  io.on('connection', connectionHandler);
 });
+
+

@@ -1,4 +1,5 @@
-<form class="container" [formGroup]="form" (submit)="submit()">
+<!-- Login form -->
+<form class="container" [formGroup]="form" (submit)="submit()" *ngIf="activeForm === 'login'">
 
   <mat-card class="card">
 
@@ -8,17 +9,39 @@
 
     <mat-card-content class="content">
 
-      <p class="text">{{ 'index.sub_text' | translate }}</p>
+      <p class="text">{{ 'index.enter_your_registration_credentials' | translate }}</p>
 
-      <!-- Username -->
+      <!-- Login -->
       <mat-form-field appearance="outline" color="primary" class="field">
 
-        <mat-label>{{ 'index.choose_your_name' | translate }}</mat-label>
+        <mat-label>{{ 'index.login' | translate }}</mat-label>
 
-        <input matInput formControlName="name">
+        <input matInput
+               formControlName="login"
+               autocomplete="username">
 
-        <mat-error *ngIf="form.get('name').getError('required')">
-          <span>{{ 'errors.required_username' | translate }}</span>
+        <mat-error *ngIf="form.get('login').getError('required')">
+          <span>{{ 'errors.required_login' | translate }}</span>
+        </mat-error>
+
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline" color="primary" class="field">
+
+        <mat-label>{{ 'index.password' | translate }}</mat-label>
+
+        <input matInput
+               formControlName="password"
+               [type]="showPassword.value === 'show' ? 'text' : 'password'"
+               autocomplete="current-password">
+
+        <button matSuffix mat-icon-button type="button" (click)="showPassword.value = showPassword.value === 'show' ? '' : 'show'">
+          <mat-icon>{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="form.get('password').getError('required')">
+          <span>{{ 'errors.required_password' | translate }}</span>
         </mat-error>
 
       </mat-form-field>
@@ -26,9 +49,85 @@
     </mat-card-content>
 
     <mat-card-actions class="actions">
-      <button mat-button color="primary" type="submit">{{ 'common.confirm' | translate }}</button>
+
+      <button mat-button color="primary" type="submit" [class.loading]="form.loading">
+        <span>{{ 'index.sign_in' | translate }}</span>
+      </button>
+
+      <a href="javascript:void(0)" class="link" (click)="setActiveForm()">{{ 'index.create_new_account' | translate }}</a>
+
     </mat-card-actions>
 
   </mat-card>
 
 </form>
+
+<!-- Register form -->
+<form class="container" [formGroup]="form" (submit)="submit()" *ngIf="activeForm === 'register'">
+
+  <mat-card class="card">
+
+    <mat-card-header>
+      <mat-card-title class="title">{{ 'index.create_new_account_in_secret_chat' | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="content">
+
+      <p class="text">{{ 'index.your_login_will_be_visible_interlocutors' | translate }}</p>
+
+      <!-- Login -->
+      <mat-form-field appearance="outline" color="primary" class="field">
+
+        <mat-label>{{ 'index.login' | translate }}</mat-label>
+
+        <input matInput
+               formControlName="login"
+               autocomplete="username">
+
+        <mat-error *ngIf="form.get('login').getError('required')">
+          <span>{{ 'errors.required_login' | translate }}</span>
+        </mat-error>
+
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline" color="primary" class="field">
+
+        <mat-label>{{ 'index.password' | translate }}</mat-label>
+
+        <input matInput
+               formControlName="password"
+               [type]="showPassword.value === 'show' ? 'text' : 'password'"
+               autocomplete="current-password">
+
+        <button matSuffix mat-icon-button type="button" (click)="showPassword.value = showPassword.value === 'show' ? '' : 'show'">
+          <mat-icon>{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="form.get('password').getError('required')">
+          <span>{{ 'errors.required_password' | translate }}</span>
+        </mat-error>
+
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions class="actions">
+
+      <button mat-button color="primary" type="submit" [class.loading]="form.loading">
+        <span>{{ 'index.sign_up' | translate }}</span>
+      </button>
+
+      <a href="javascript:void(0)" class="link" (click)="setActiveForm()">{{ 'index.i_have_an_account' | translate }}</a>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>
+
+<input type="hidden" #showPassword>
+
+<re-captcha #captchaRef="reCaptcha" (resolved)="resolved($event)"></re-captcha>
+
+

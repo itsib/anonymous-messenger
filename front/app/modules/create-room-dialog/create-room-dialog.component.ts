@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Room } from '../../../types';
+import { v4 as uuid } from 'uuid';
+import { RoomsProvider } from '../../providers/rooms/rooms.provider';
 
 @Component({
   selector: 'app-create-room-dialog',
@@ -12,10 +16,13 @@ export class CreateRoomDialogComponent {
   form: FormGroup & {loading?: boolean};
 
   constructor(
-    private dialogRef: MatDialogRef<CreateRoomDialogComponent>
+    private router: Router,
+    private dialogRef: MatDialogRef<CreateRoomDialogComponent>,
+    private roomsProvider: RoomsProvider,
   ) {
     this.form = new FormGroup({
-      roomName: new FormControl('', [Validators.required])
+      roomName: new FormControl('', [Validators.required]),
+      password: new FormControl('')
     });
   }
 
@@ -23,8 +30,18 @@ export class CreateRoomDialogComponent {
    * Create room
    */
   createRoom(): void {
+    if (this.form.invalid || this.form.loading) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    const room: Room = {
+      id: uuid(),
+      name: this.form.value.roomName,
+    };
 
-    this.form.loading = true;
+    this.roomsProvider.createRoom(room);
+    this.dialogRef.close();
+    this.router.navigate(['/chat', room.id]);
   }
 
   /**

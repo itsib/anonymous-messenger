@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'localhost:4444'
+  host: 'localhost:4444',
+  reCaptchaKey: '6LdMwK0ZAAAAAORXb4ScyDdF_jepld6MdloaQ9uL'
 };
 
 /*

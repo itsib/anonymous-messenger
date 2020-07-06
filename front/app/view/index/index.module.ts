@@ -4,8 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
+import { RecaptchaModule } from 'ng-recaptcha';
 import { IndexComponent } from './index.component';
 
 @NgModule({
@@ -17,6 +19,8 @@ import { IndexComponent } from './index.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
+    RecaptchaModule,
   ],
   exports: [
     IndexComponent

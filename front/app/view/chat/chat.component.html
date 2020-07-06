@@ -12,14 +12,14 @@
 
   <div class="rooms-list">
 
-    <div class="room-item selected" *ngIf="false">
+    <div class="room-item selected" *ngFor="let room of roomsProvider.rooms" [class.selected]="room.id === activeRoom">
 
       <div class="icon">
         <mat-icon>account_circle</mat-icon>
       </div>
 
       <div class="info">
-        <div class="name">Test chat room</div>
+        <div class="name">{{ room.name }}</div>
         <div class="description">Some description test. Long long long</div>
       </div>
 
@@ -37,7 +37,7 @@
 
   </div>
 
-  <div class="create-room">
+  <div class="create-room" *ngIf="!roomsProvider?.rooms?.length">
 
     <div class="arrow">
       <img src="assets/images/arrow-up.svg">

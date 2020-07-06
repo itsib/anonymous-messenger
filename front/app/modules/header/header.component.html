@@ -16,7 +16,7 @@
 
     <div class="user" [matMenuTriggerFor]="userMenu">
 
-      <span class="name">{{ storage.getUser()?.name }}</span>
+<!--      <span class="name">{{ auth.getUser()?.name }}</span>-->
 
       <div class="avatar">
         <mat-icon aria-hidden="false" aria-label="User menu">account_circle</mat-icon>
@@ -29,7 +29,7 @@
 </header>
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="logout()">
     <mat-icon>exit_to_app</mat-icon>
     <span>{{ 'common.log_out' | translate }}</span>
   </button>

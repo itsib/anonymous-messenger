@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { StorageService } from '../../services/storage/storage.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class HeaderComponent {
 
   @Output() openChange = new EventEmitter();
 
-  constructor(public storage: StorageService) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   /**
    * Hamburger click handler
@@ -20,5 +21,13 @@ export class HeaderComponent {
   hamburger(): void {
     this.open = !this.open;
     this.openChange.emit(this.open);
+  }
+
+  /**
+   * Logout from the room
+   */
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/']);
   }
 }

@@ -9,6 +9,7 @@
 
     <p class="note">{{ 'modals.create_private_room_note' | translate }}</p>
 
+    <!-- Room name -->
     <mat-form-field appearance="outline" color="primary" class="room-name-field">
 
       <mat-label>{{ 'modals.room_name' | translate }}</mat-label>
@@ -18,6 +19,23 @@
       <mat-error *ngIf="form.get('roomName').getError('required')">
         <span>{{ 'errors.required_room_name' | translate }}</span>
       </mat-error>
+
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field appearance="outline" color="primary" class="room-name-field">
+
+      <mat-label>{{ 'modals.password' | translate }}</mat-label>
+
+      <input matInput formControlName="password" name="password" [type]="showPassword.value === 'show' ? 'text' : 'password'">
+
+      <button matSuffix mat-icon-button type="button" (click)="showPassword.value = showPassword.value === 'show' ? '' : 'show'">
+        <mat-icon>{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+
+      <mat-hint>
+        <span>{{ 'modals.room_password_hint' | translate }}</span>
+      </mat-hint>
 
     </mat-form-field>
 
@@ -32,4 +50,6 @@
   </div>
 
 </form>
+
+<input type="hidden" #showPassword>
 

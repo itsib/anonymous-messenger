@@ -5,7 +5,7 @@
     "outDir": "./out-tsc/app",
     "paths": {
       "@types": [
-        "../types/index"
+        "types/index"
       ]
     }
   },

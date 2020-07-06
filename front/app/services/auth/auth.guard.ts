@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { StorageService } from '../storage/storage.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-  constructor(private storage: StorageService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
     return this.performCheck();
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   private performCheck(): boolean {
-    const canActivate = !!this.storage.getUser();
+    const canActivate = this.auth.isAuthenticated();
     if (!canActivate) {
       this.router.navigate(['/']);
     }
