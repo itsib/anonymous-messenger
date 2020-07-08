@@ -12,32 +12,11 @@
 
   <div class="rooms-list">
 
-    <div class="room-item selected" *ngFor="let room of roomsProvider.rooms" [class.selected]="room.id === activeRoom">
-
-      <div class="icon">
-        <mat-icon>account_circle</mat-icon>
-      </div>
-
-      <div class="info">
-        <div class="name">{{ room.name }}</div>
-        <div class="description">Some description test. Long long long</div>
-      </div>
-
-      <div class="options">
-
-        <div class="date">25.07.18</div>
-
-        <button class="menu" mat-icon-button>
-          <mat-icon>more_horiz</mat-icon>
-        </button>
-
-      </div>
-
-    </div>
+    <app-room-item [room]="room" *ngFor="let room of rooms"></app-room-item>
 
   </div>
 
-  <div class="create-room" *ngIf="!roomsProvider?.rooms?.length">
+  <div class="create-room" *ngIf="rooms && !rooms?.length">
 
     <div class="arrow">
       <img src="assets/images/arrow-up.svg">
@@ -77,17 +56,17 @@
       <div class="options">
 
         <button mat-button>
-          <mat-icon>sentiment_satisfied_alt</mat-icon>
+          <mat-icon aria-hidden="true">sentiment_satisfied_alt</mat-icon>
         </button>
 
         <div class="separator"></div>
 
         <button mat-button>
-          <mat-icon>attach_file</mat-icon>
+          <mat-icon aria-hidden="true">attach_file</mat-icon>
         </button>
 
         <button mat-button color="primary" [disabled]="form.invalid">
-          <mat-icon>send</mat-icon>
+          <mat-icon aria-hidden="true">send</mat-icon>
         </button>
 
       </div>

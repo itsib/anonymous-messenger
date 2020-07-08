@@ -1,10 +1,12 @@
-import { User } from '../index';
+import { User } from '..';
 
 export interface Room {
 
-  id: string;
+  _id?: string;
 
-  name: string;
+  name?: string;
+
+  protected?: boolean;
 
   clients?: User[];
 }

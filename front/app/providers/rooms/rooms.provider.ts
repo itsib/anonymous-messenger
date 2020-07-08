@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { EventType, Room } from '../../../types';
+import { Router } from '@angular/router';
+import { EventType, Room } from '@types';
+import { BehaviorSubject } from 'rxjs';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
@@ -7,13 +9,13 @@ import { AuthService } from '../../services/auth/auth.service';
 @Injectable({providedIn: 'root'})
 export class RoomsProvider {
 
-  rooms: Room[];
+  rooms: BehaviorSubject<Room[]>;
 
   protected _socket: SocketIOClient.Socket;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
 
-    this.rooms = [];
+    this.rooms = new BehaviorSubject<Room[]>([]);
 
     this.auth.isAuthenticatedStream().subscribe((isLogged: boolean) => {
       if (this._socket) {
@@ -22,11 +24,17 @@ export class RoomsProvider {
       }
 
       if (isLogged) {
-        // const user = this.auth.getUser();
-        // this._socket = io(environment.host, {path: '/socket', query: {id: user.id, name: user.name}});
-        // this._socket.on('new-room', this.onNewRoom());
-        // this._socket.on('join-room', this.onJoinRoom());
-        // this._socket.on('leave-room', this.onLeaveRoom());
+        this._socket = io(environment.host, {path: '/socket', query: {token: this.auth.token}});
+        this._socket.on('list-room', this.onListRoom());
+        this._socket.on('join-room', this.onJoinRoom());
+        this._socket.on('leave-room', this.onLeaveRoom());
+
+        this._socket.on('error', (error: string) => {
+          if (error === 'not_authorized') {
+            this.auth.logout();
+            this.router.navigate(['/']);
+          }
+        });
       }
     });
   }
@@ -35,11 +43,7 @@ export class RoomsProvider {
    * Create new room
    */
   createRoom(room: Room): void {
-    const data: Room = {
-      id: room.id,
-      name: room.name
-    };
-    this._socket.emit('new-room' as EventType, data);
+    this._socket.emit('new-room', room);
   }
 
   /**
@@ -50,13 +54,11 @@ export class RoomsProvider {
   }
 
   /**
-   * New room handler
+   * Returns room list after connection
    */
-  private onNewRoom(): (room: Room) => void {
-    return (room: Room) => {
-      if (!this.rooms.some(i => i.id === room.id)) {
-        this.rooms.push(room);
-      }
+  private onListRoom(): (rooms: Room[]) => void {
+    return (rooms: Room[]): void => {
+      this.rooms.next(rooms);
     };
   }
 
@@ -65,12 +67,7 @@ export class RoomsProvider {
    */
   private onJoinRoom(): (room: Room) => void {
     return (room: Room): void => {
-      const index = this.rooms.findIndex(i => i.id === room.id);
-      if (index === -1) {
-        this.rooms.push(room);
-      } else {
-        this.rooms.splice(index, 1, room);
-      }
+
     };
   }
 

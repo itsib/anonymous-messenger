@@ -7,6 +7,7 @@ import { config } from './config';
 import { routes } from './routes/routes';
 import { connectionHandler } from './socket/socket';
 import * as bodyParser from 'body-parser';
+import * as jwt from 'jsonwebtoken';
 
 const app = express();
 
@@ -35,10 +36,27 @@ mongoose.connect(config.dbUrl, { useNewUrlParser: true, useUnifiedTopology: true
 
   console.log('Mongo is connected...');
 
+  // Crete web server
   const server: Server = app.listen(config.port, () => {
     console.log(`Server is running in http://localhost:${config.port}`);
   });
+
+  // Crete socket server
   const io: socketio.Server = socketio(server, { path: '/socket' });
+
+  // Check authorization
+  io.use(function(socket, next) {
+    const token = socket.handshake.query.token;
+
+    try {
+      const payload = jwt.verify(token, config.secret) as {_id: string};
+      socket.handshake['userId'] = payload._id;
+    } catch (e) {
+      return next(new Error('not_authorized'));
+    }
+
+    return next();
+  });
 
   io.on('connection', connectionHandler);
 });

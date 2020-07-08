@@ -1,0 +1,25 @@
+<a class="room-item" [class.selected]="selected" [routerLink]="['/chat', room._id]" href="javascript: void(0)">
+
+  <div class="icon">
+    <mat-icon aria-hidden="true">account_circle</mat-icon>
+  </div>
+
+  <div class="info">
+    <div class="name">{{ room.name }}</div>
+    <div class="description">
+      <span>{{ 'chat.users' | translate }}</span>
+      <span>{{ room.clients.length }}</span>
+    </div>
+  </div>
+
+  <div class="options">
+
+    <div class="date">25.07.18</div>
+
+    <button class="menu" aria-hidden="true" mat-icon-button>
+      <mat-icon aria-hidden="true">more_horiz</mat-icon>
+    </button>
+
+  </div>
+
+</a>

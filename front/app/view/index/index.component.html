@@ -40,7 +40,7 @@
                autocomplete="current-password">
 
         <button matSuffix mat-icon-button type="button" (click)="showPassword.value = showPassword.value === 'show' ? '' : 'show'">
-          <mat-icon>{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
+          <mat-icon aria-hidden="true">{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
 
         <mat-error *ngIf="form.get('password').getError('required')">
@@ -113,7 +113,7 @@
                autocomplete="current-password">
 
         <button matSuffix mat-icon-button type="button" (click)="showPassword.value = showPassword.value === 'show' ? '' : 'show'">
-          <mat-icon>{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
+          <mat-icon aria-hidden="true">{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
 
         <mat-error *ngIf="form.get('password').getError('required')">

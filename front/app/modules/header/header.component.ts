@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserProvider } from '../../providers/user/user.provider';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class HeaderComponent {
 
   @Output() openChange = new EventEmitter();
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public userProvider: UserProvider, public auth: AuthService, private router: Router) { }
 
   /**
    * Hamburger click handler

@@ -32,7 +32,8 @@
     "conversations": "Conversations",
     "create_room": "Create a room",
     "write_message": "Write a message...",
-    "create_private_room_invite": "First, create a private room."
+    "create_private_room_invite": "First, create a private room.",
+    "users": "Users"
   },
   "modals": {
     "create_private_room": "Create a private room",

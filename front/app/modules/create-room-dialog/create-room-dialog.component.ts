@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Room } from '../../../types';
-import { v4 as uuid } from 'uuid';
 import { RoomsProvider } from '../../providers/rooms/rooms.provider';
 
 @Component({
@@ -21,7 +20,7 @@ export class CreateRoomDialogComponent {
     private roomsProvider: RoomsProvider,
   ) {
     this.form = new FormGroup({
-      roomName: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       password: new FormControl('')
     });
   }
@@ -35,13 +34,12 @@ export class CreateRoomDialogComponent {
       return;
     }
     const room: Room = {
-      id: uuid(),
-      name: this.form.value.roomName,
+      name: this.form.value.name,
+      protected: !!this.form.value.password
     };
 
     this.roomsProvider.createRoom(room);
     this.dialogRef.close();
-    this.router.navigate(['/chat', room.id]);
   }
 
   /**

@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
@@ -7,7 +8,7 @@ import { AuthService } from '../services/auth/auth.service';
 @Injectable({providedIn: 'root'})
 export class AppInterceptor implements HttpInterceptor {
 
-  constructor(private http: HttpClient, private auth: AuthService) {
+  constructor(private http: HttpClient, private auth: AuthService, private router: Router) {
 
   }
 
@@ -30,6 +31,7 @@ export class AppInterceptor implements HttpInterceptor {
         catchError((err: HttpErrorResponse) => {
           if (err.status === 401) {
             this.auth.logout();
+            this.router.navigate(['/']);
           }
           return throwError(err.error && err.error.message ? err.error : err);
         })

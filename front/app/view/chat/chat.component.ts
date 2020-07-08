@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Room } from '@types';
 import { SubStore } from '../../common/sub-store';
 import { CreateRoomDialogComponent } from '../../modules/create-room-dialog/create-room-dialog.component';
 import { RoomsProvider } from '../../providers/rooms/rooms.provider';
@@ -12,6 +13,8 @@ import { RoomsProvider } from '../../providers/rooms/rooms.provider';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
+
+  rooms: Room[];
 
   isOpen: boolean;
 
@@ -25,7 +28,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    public roomsProvider: RoomsProvider
+    private roomsProvider: RoomsProvider
   ) {
     this.form = new FormGroup({
       message: new FormControl('', [Validators.required])
@@ -44,6 +47,10 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.roomsProvider.joinRoom(roomId);
       }
       this.activeRoom = roomId;
+    });
+
+    this._subStore.sub = this.roomsProvider.rooms.subscribe((rooms: Room[]) => {
+      this.rooms = rooms;
     });
   }
 

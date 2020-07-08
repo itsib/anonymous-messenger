@@ -14,9 +14,9 @@
 
       <mat-label>{{ 'modals.room_name' | translate }}</mat-label>
 
-      <input matInput formControlName="roomName" name="roomName" autofocus>
+      <input matInput formControlName="name" name="name" autofocus>
 
-      <mat-error *ngIf="form.get('roomName').getError('required')">
+      <mat-error *ngIf="form.get('name').getError('required')">
         <span>{{ 'errors.required_room_name' | translate }}</span>
       </mat-error>
 
@@ -30,7 +30,7 @@
       <input matInput formControlName="password" name="password" [type]="showPassword.value === 'show' ? 'text' : 'password'">
 
       <button matSuffix mat-icon-button type="button" (click)="showPassword.value = showPassword.value === 'show' ? '' : 'show'">
-        <mat-icon>{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
+        <mat-icon aria-hidden="true">{{ showPassword.value === 'show' ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
 
       <mat-hint>

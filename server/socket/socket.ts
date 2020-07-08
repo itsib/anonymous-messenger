@@ -1,39 +1,40 @@
-import { Room, User } from '../../front/types';
 import * as socketio from 'socket.io';
 import { Socket } from 'socket.io';
-
-const rooms: Map<string, Room> = new Map<string, User>();
-const users: Map<string, User & {rooms: string[]}> = new Map<string, (User & {rooms: string[]})>();
-
-export function connectionHandler(this: socketio.Server, socket: Socket) {
-  const userId = socket.handshake.query.id;
-
-  // Redis
-  // const savedUser =
-
-  // const test = await Redis.get('test');
-  // console.log(test);
+import { Room, RoomDocument } from '../models/room.model';
+import { User, UserDocument } from '../models/user.model';
 
 
-  users.set(userId, {
-    id: socket.handshake.query.id,
-    name: socket.handshake.query.name,
-    rooms: []
+export async function connectionHandler(this: socketio.Server, socket: Socket) {
+  const userId = socket.handshake['userId'];
+  const user: UserDocument = await User.findById(userId);
+
+  user.online = true;
+  await user.save();
+
+  const rooms = await Room.getUserRooms(userId);
+
+  // Send I'm online
+  let socketRoomsToSend: socketio.Namespace;
+  rooms.forEach(room => {
+    socket.join(`${room._id}`);
+    socketRoomsToSend = (socketRoomsToSend ? socketRoomsToSend : this).to(`${room._id}`);
   });
+  socketRoomsToSend && socketRoomsToSend.emit('user-online', user.getProfile());
 
-  console.log(`User ${socket.handshake.query.name} is connected.`);
+  // Send rooms list
+  socket.emit('list-room', rooms);
+
+  console.log(`User ${user.login} is connected.`);
 
   /**
    * Create new room
    */
-  socket.on('new-room', (room: Room) => {
-    const oldRoom: Room = rooms.get(room.id);
-    if (oldRoom) {
-      console.log(`Room ${oldRoom.id} room already exist`);
-    } else {
-      room.clients = [];
-      rooms.set(room.id, room);
-      socket.emit('new-room', room);
+  socket.on('new-room', async (roomData: {name: string, protected: boolean}) => {
+    try {
+      await Room.create(Object.assign(roomData, {clients: [user]}) as RoomDocument);
+      socket.emit('list-room', await Room.getUserRooms(userId));
+    } catch (e) {
+      console.log(e);
     }
   });
 
@@ -41,30 +42,13 @@ export function connectionHandler(this: socketio.Server, socket: Socket) {
    * Join to room
    */
   socket.on('join-room', ({id}: {id: string}) => {
-    const room: Room = rooms.get(id);
-    const user = users.get(userId);
-    if (room) {
-
-      // Add user to room
-      room.clients.push(user);
-      socket.join(room.id);
-      this.to(room.id).emit('join-room', room);
-
-      // Add room to user
-      user.rooms.push(room.id);
-      users.set(userId, user);
-
-      console.log(`${user.name} join to room ${room.name}`);
-    } else {
-
-      console.log(`Room ${id} not found`);
-    }
+    console.log(id);
   });
 
   /**
    * Update room name
    */
-  socket.on('update-room', (room: Room) => {
+  socket.on('update-room', (room: {}) => {
 
   });
 
@@ -78,8 +62,10 @@ export function connectionHandler(this: socketio.Server, socket: Socket) {
   /**
    * Disconnect
    */
-  socket.on('disconnect', () => {
-    console.log('Socket disconnect');
+  socket.on('disconnect', async () => {
+    user.online = false;
+    await user.save();
+    console.log(`User ${user.login} disconnect`);
   });
 }
 

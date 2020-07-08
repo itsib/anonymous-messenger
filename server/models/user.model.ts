@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import * as mongoose from 'mongoose';
 import { config } from '../config';
 
-interface UserModel extends mongoose.Document {
+interface UserDocument extends mongoose.Document {
 
   login: string;
 
@@ -18,6 +18,8 @@ interface UserModel extends mongoose.Document {
   getAuthToken: () => string;
 
   checkPassword: (password: string) => Promise<boolean>;
+
+  getProfile: () => object;
 }
 
 const UserModeSchema = new mongoose.Schema(
@@ -39,6 +41,16 @@ UserModeSchema.methods.checkPassword = async function(password: string): Promise
   return await bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model<UserModel>('User', UserModeSchema);
+UserModeSchema.methods.getProfile = function(): object {
+  return {
+    _id: this._id,
+    login: this.login,
+    online: this.online,
+    createdAt: this.createdAt,
+    updatedAt: this.updatedAt,
+  };
+};
 
-export { User, UserModel };
+const User = mongoose.model<UserDocument>('User', UserModeSchema);
+
+export { User, UserDocument };

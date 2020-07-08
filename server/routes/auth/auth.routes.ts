@@ -3,8 +3,9 @@ import * as express from 'express';
 import { validationResult } from 'express-validator';
 import fetch from 'node-fetch';
 import { config } from '../../config';
-import { User, UserModel } from '../../models/user.model';
-import { Validators } from './auth.validators';
+import { Validators } from '../../middlewares/auth.validators';
+import { authorization } from '../../middlewares/authorization';
+import { User, UserDocument } from '../../models/user.model';
 
 const authRoutes = express.Router();
 
@@ -37,7 +38,7 @@ authRoutes.post('/login', Validators.postAuth, async (req: express.Request, res:
 
 
   try {
-    const user: UserModel = await User.findOne({ login: req.body.login });
+    const user: UserDocument = await User.findOne({ login: req.body.login });
     if (!user) {
       return res.status(400).json({
         code: 400, message: 'errors.invalid_password_or_login', errors: [{
@@ -114,6 +115,13 @@ authRoutes.post('/register', Validators.postAuth, async (req: express.Request, r
     console.error(e);
     return res.status(500).json({ code: 500, message: 'errors.internal_error' });
   }
+});
+
+/**
+ * Get current user
+ */
+authRoutes.get('/me', authorization, async (req: express.Request & {user: UserDocument}, res: express.Response) => {
+  return res.json(req.user.getProfile());
 });
 
 /**
