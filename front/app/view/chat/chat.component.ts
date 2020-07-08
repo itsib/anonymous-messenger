@@ -20,8 +20,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
-  activeRoom: string;
-
   private _subStore: SubStore;
 
   constructor(
@@ -46,12 +44,9 @@ export class ChatComponent implements OnInit, OnDestroy {
       if (roomId) {
         this.roomsProvider.joinRoom(roomId);
       }
-      this.activeRoom = roomId;
     });
 
-    this._subStore.sub = this.roomsProvider.rooms.subscribe((rooms: Room[]) => {
-      this.rooms = rooms;
-    });
+    this._subStore.sub = this.roomsProvider.rooms.subscribe((rooms: Room[]) => this.rooms = rooms);
   }
 
   /**

@@ -1,17 +1,27 @@
 @import "variables";
 @import "mixins";
 
+:host {
+  height: 70px;
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
 .room-item {
-  margin-bottom: 20px;
-  padding: 10px 15px 10px 10px;
+  width: 100%;
+  padding: 10px;
   display: flex;
   align-items: stretch;
-  background-color: $color-bg;
-  border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
   color: white;
   transition: background-color .2s ease-in;
+  position: relative;
+  z-index: 2;
 
   .icon {
     width: 46px;
@@ -46,31 +56,34 @@
       letter-spacing: 0.5px;
     }
   }
+}
 
-  .options {
-    width: 48px;
-    margin-left: auto;
-    position: relative;
-
-    .date {
-      opacity: .6;
-      font-size: 12px;
-      font-weight: 300;
-    }
-
-    .menu {
-      right: -6px;
-      bottom: -7px;
-      width: 36px;
-      height: 36px;
-      line-height: 36px;
-      position: absolute;
-    }
-  }
+.room-background {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: $color-bg;
+  transition: all .2s ease-out;
+  position: absolute;
+  z-index: 1;
 
   &.selected {
-    margin: -5px -5px 15px;
-    padding: 15px 20px 15px 15px;
+    left: -5px;
+    right: -5px;
+    top: -5px;
+    bottom: -5px;
     background-color: $color-primary;
   }
+}
+
+.room-menu-btn {
+  right: 7px;
+  top: 4px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  position: absolute;
+  z-index: 3;
 }

@@ -1,4 +1,4 @@
-<a class="room-item" [class.selected]="selected" [routerLink]="['/chat', room._id]" href="javascript: void(0)">
+<a class="room-item" [routerLink]="['/chat', room._id]" href="javascript: void(0)" #roomLink>
 
   <div class="icon">
     <mat-icon aria-hidden="true">account_circle</mat-icon>
@@ -7,19 +7,34 @@
   <div class="info">
     <div class="name">{{ room.name }}</div>
     <div class="description">
-      <span>{{ 'chat.users' | translate }}</span>
-      <span>{{ room.clients.length }}</span>
+      <span>{{ 'chat.online' | translate }} </span>
+      <span>{{ online() }}/{{ room.clients.length }}</span>
     </div>
   </div>
 
-  <div class="options">
-
-    <div class="date">25.07.18</div>
-
-    <button class="menu" aria-hidden="true" mat-icon-button>
-      <mat-icon aria-hidden="true">more_horiz</mat-icon>
-    </button>
-
-  </div>
-
 </a>
+
+<div class="room-background" [class.selected]="selected" matRipple [matRippleTrigger]="roomLink"></div>
+
+<button class="room-menu-btn" aria-hidden="true" mat-icon-button [matMenuTriggerFor]="roomMenu">
+  <mat-icon aria-hidden="true">more_horiz</mat-icon>
+</button>
+
+<mat-menu #roomMenu="matMenu">
+  <button mat-menu-item (click)="copyInviteLink()">
+    <mat-icon aria-hidden="true">content_copy</mat-icon>
+    <span>{{ 'chat.copy_invite_link' | translate }}</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon aria-hidden="true">settings</mat-icon>
+    <span>{{ 'chat.room_settings' | translate }}</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon aria-hidden="true">group</mat-icon>
+    <span>{{ 'chat.members' | translate }}</span>
+  </button>
+  <button mat-menu-item (click)="leaveRoom()">
+    <mat-icon aria-hidden="true">exit_to_app</mat-icon>
+    <span>{{ 'chat.leave_room' | translate }}</span>
+  </button>
+</mat-menu>

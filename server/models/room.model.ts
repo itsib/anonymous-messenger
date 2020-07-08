@@ -44,18 +44,9 @@ const RoomModelSchema = new mongoose.Schema(
  * Get all rooms of current user
  */
 RoomModelSchema.statics.getUserRooms = async function(userId: string): Promise<RoomDocument[]> {
-  const rooms = await this.find({clients: [mongoose.Types.ObjectId(userId)]}).populate('clients').exec();
-
-  return rooms.map((room: RoomDocument) => {
-    return {
-      _id: room._id,
-      name: room.name,
-      protected: room.protected,
-      clients: room.clients.map((client: UserDocument) => client.getProfile()),
-      createdAt: room.createdAt,
-      updatedAt: room.updatedAt,
-    };
-  });
+  return  await this.find({clients: mongoose.Types.ObjectId(userId)})
+    .populate('clients', '_id login online createdAt updatedAt')
+    .exec();
 };
 
 const Room: RoomModel = mongoose.model<RoomDocument, RoomModel>('Room', RoomModelSchema);

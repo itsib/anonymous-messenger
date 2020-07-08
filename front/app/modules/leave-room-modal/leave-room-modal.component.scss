@@ -1,0 +1,22 @@
+@import "variables";
+@import "mixins";
+
+.modal-content {
+
+  .note {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+  }
+}
+
+.modal-actions {
+  padding-top: 25px;
+  padding-bottom: 20px;
+
+  .cancel {
+    color: gray;
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,21 @@
+<div class="modal">
+
+  <h1 mat-dialog-title class="modal-title">
+    <span>{{ 'modals.leave_room' | translate }}</span>
+  </h1>
+
+  <div mat-dialog-content class="modal-content">
+
+    <p class="note">{{ 'modals.leave_room_note' | translate }}</p>
+
+  </div>
+
+  <div mat-dialog-actions class="modal-actions">
+
+    <button mat-button class="leave" cdkFocusInitial color="warn" (click)="leaveRoom()">{{ 'common.leave' | translate }}</button>
+
+    <button mat-button class="cancel" (click)="cancel()" type="button">{{ 'common.cancel' | translate }}</button>
+
+  </div>
+
+</div>

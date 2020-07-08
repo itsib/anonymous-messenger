@@ -1,11 +1,13 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { RECAPTCHA_SETTINGS, RecaptchaModule } from 'ng-recaptcha';
+import { RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -36,6 +38,8 @@ import { IndexModule } from './view/index/index.module';
     }),
     BrowserAnimationsModule,
     HttpClientModule,
+    ClipboardModule,
+    MatSnackBarModule,
     IndexModule,
     ChatModule
   ],
