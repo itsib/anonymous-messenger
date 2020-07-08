@@ -42,7 +42,7 @@
 
   <div class="input-container">
 
-    <form class="text-block" [formGroup]="form">
+    <form class="text-block" [formGroup]="form" (submit)="sendMessage()">
 
       <textarea autosize
                 [minRows]="1"

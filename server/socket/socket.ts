@@ -10,6 +10,10 @@ export async function connectionHandler(this: socketio.Server, socket: Socket) {
 
   await sendOnline.call(this);
 
+  socket.on('message', (event: {roomId: string, message: string}) => {
+    socket.broadcast.to(event.roomId).emit('message', event);
+  });
+
   /**
    * Create new room
    */

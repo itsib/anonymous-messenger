@@ -33,6 +33,9 @@ export class RoomsProvider {
         this._socket.on('left-room', this.onLeftRoom());
         this._socket.on('user-online', this.onUserOnline());
         this._socket.on('user-offline', this.onUserOffline());
+        this._socket.on('message', (message) => {
+          console.log(message);
+        });
 
         this._socket.on('error', (error: string) => {
           if (error === 'not_authorized') {
@@ -42,6 +45,10 @@ export class RoomsProvider {
         });
       }
     });
+  }
+
+  message(data: {roomId, message}): void {
+    this._socket.emit('message', data);
   }
 
   /**

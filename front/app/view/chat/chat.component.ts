@@ -20,6 +20,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
+  roomId: string;
+
   private _subStore: SubStore;
 
   constructor(
@@ -29,7 +31,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     private roomsProvider: RoomsProvider
   ) {
     this.form = new FormGroup({
-      message: new FormControl('', [Validators.required])
+      message: new FormControl('', [Validators.required]),
+      roomId: new FormControl('', [Validators.required])
     });
 
     this._subStore = new SubStore();
@@ -44,6 +47,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       if (roomId) {
         this.roomsProvider.joinRoom(roomId);
       }
+      this.form.get('roomId').setValue(roomId);
     });
 
     this._subStore.sub = this.roomsProvider.rooms.subscribe((rooms: Room[]) => this.rooms = rooms);
@@ -61,5 +65,12 @@ export class ChatComponent implements OnInit, OnDestroy {
    */
   createRoom(): void {
     this.dialog.open(CreateRoomDialogComponent);
+  }
+
+  sendMessage(): void {
+    if (this.form.valid) {
+      this.roomsProvider.message(this.form.value);
+      this.form.get('message').setValue('');
+    }
   }
 }
