@@ -7,6 +7,8 @@ interface UserDocument extends mongoose.Document {
 
   login: string;
 
+  avatar: string;
+
   password: string;
 
   online: boolean;
@@ -25,6 +27,7 @@ interface UserDocument extends mongoose.Document {
 const UserModeSchema = new mongoose.Schema(
   {
     login: { type: String, unique: true, required: true },
+    avatar: String,
     password: { type: String, required: true },
     online: { type: Boolean, default: false },
   },
@@ -45,6 +48,7 @@ UserModeSchema.methods.getProfile = function(): object {
   return {
     _id: this._id,
     login: this.login,
+    avatar: this.avatar,
     online: this.online,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,

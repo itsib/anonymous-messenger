@@ -1,0 +1,53 @@
+<form class="modal" [formGroup]="form">
+
+  <h1 mat-dialog-title class="modal-title">
+    <span>{{ 'modals.profile_settings' | translate }}</span>
+  </h1>
+
+  <div mat-dialog-content class="modal-content">
+
+    <!-- Upload avatar -->
+    <div class="avatar-block">
+
+      <div class="title">
+        <span>{{ 'modals.avatar' | translate }}</span>
+      </div>
+
+      <div class="avatar">
+
+        <img [src]="form.get('avatar').value" *ngIf="form.get('avatar').value" class="image">
+
+        <mat-icon class="image-replacement" *ngIf="!form.get('avatar').value">account_circle</mat-icon>
+
+        <input type="file" class="file-input" (change)="changeFile($event)">
+
+        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+
+      </div>
+
+      <div class="text">
+        <span>{{ 'modals.files_support' | translate }}</span>
+      </div>
+
+    </div>
+
+    <!-- Login input -->
+    <mat-form-field appearance="outline" color="primary" class="field">
+
+      <mat-label>{{ 'modals.your_login' | translate }}</mat-label>
+
+      <input matInput formControlName="login">
+
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-actions class="modal-actions">
+
+    <button mat-button class="leave" cdkFocusInitial color="primary" (click)="save()">{{ 'common.save' | translate }}</button>
+
+    <button mat-button class="cancel" (click)="cancel()" type="button">{{ 'common.cancel' | translate }}</button>
+
+  </div>
+
+</form>

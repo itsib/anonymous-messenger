@@ -5,5 +5,7 @@ export interface User {
 
   login: string;
 
+  avatar?: string;
+
   online?: boolean;
 }

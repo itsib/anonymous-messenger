@@ -1,10 +1,12 @@
 {
   "common": {
+    "save": "Save",
     "confirm": "Confirm",
     "log_out": "Log Out",
     "create": "Create",
     "cancel": "Cancel",
-    "leave": "Leave"
+    "leave": "Leave",
+    "settings": "Settings"
   },
   "errors": {
     "required_login": "Please enter your Login.",
@@ -43,12 +45,16 @@
     "invite_link_was_copied": "Invite link was copied to clipboard."
   },
   "modals": {
+    "avatar": "Avatar",
     "create_private_room": "Create a private room",
     "leave_room": "Leave Room",
     "create_private_room_note": "The name of the room will be visible to your interlocutors.",
     "room_name": "Room Name",
     "password": "Password",
     "room_password_hint": "This password additionally encrypts your messages.",
-    "leave_room_note": "After you leave the room, we will try to delete all your messages everyone has users in the room. But we do not guarantee that the messages everyone has the participants in the room will be removed. But we guarantee that not a single message was sent to our servers."
+    "leave_room_note": "After you leave the room, we will try to delete all your messages everyone has users in the room. But we do not guarantee that the messages everyone has the participants in the room will be removed. But we guarantee that not a single message was sent to our servers.",
+    "profile_settings": "Profile Settings",
+    "your_login": "Your Login",
+    "files_support": "Supported file types: SVG, PNG, JPG, GIF, BMP"
   }
 }

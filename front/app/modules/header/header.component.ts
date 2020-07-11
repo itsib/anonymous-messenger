@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserProvider } from '../../providers/user/user.provider';
 import { AuthService } from '../../services/auth/auth.service';
+import { UserSettingsDialogComponent } from '../user-settings-dialog/user-settings-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,12 @@ export class HeaderComponent {
 
   @Output() openChange = new EventEmitter();
 
-  constructor(public userProvider: UserProvider, public auth: AuthService, private router: Router) { }
+  constructor(
+    public userProvider: UserProvider,
+    public auth: AuthService,
+    private router: Router,
+    private dialog: MatDialog,
+  ) { }
 
   /**
    * Hamburger click handler
@@ -30,5 +37,12 @@ export class HeaderComponent {
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/']);
+  }
+
+  /**
+   * To open user settings modal dialog
+   */
+  userSettings(): void {
+    this.dialog.open(UserSettingsDialogComponent, {width: '450px'});
   }
 }

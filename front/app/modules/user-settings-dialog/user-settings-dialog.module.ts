@@ -7,21 +7,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
-import { CreateRoomDialogComponent } from './create-room-dialog.component';
+import { UserSettingsDialogComponent } from './user-settings-dialog.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     MatDialogModule,
-    MatButtonModule,
     TranslateModule,
-    MatFormFieldModule,
+    MatButtonModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
     MatInputModule,
     MatIconModule,
   ],
   declarations: [
-    CreateRoomDialogComponent
+    UserSettingsDialogComponent
   ]
 })
-export class CreateRoomDialogModule { }
+export class UserSettingsDialogModule { }

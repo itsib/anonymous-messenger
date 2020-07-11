@@ -29,6 +29,10 @@
 </header>
 
 <mat-menu #userMenu="matMenu">
+  <button mat-menu-item (click)="userSettings()">
+    <mat-icon aria-hidden="true">settings</mat-icon>
+    <span>{{ 'common.settings' | translate }}</span>
+  </button>
   <button mat-menu-item (click)="logout()">
     <mat-icon aria-hidden="true">exit_to_app</mat-icon>
     <span>{{ 'common.log_out' | translate }}</span>
