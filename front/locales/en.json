@@ -17,7 +17,8 @@
     "validation_failed": "Form validation failed.",
     "login_already_exist": "Use with this name already exists, select a different name",
     "invalid_password_or_login": "Wrong login or password",
-    "password_is_short": "The password is too short and must contain at least 6 characters"
+    "password_is_short": "The password is too short and must contain at least 6 characters",
+    "unsupported_file_type": "Unsupported file type, supported files: {supported}"
   },
   "index": {
     "login": "Login",
@@ -55,6 +56,6 @@
     "leave_room_note": "After you leave the room, we will try to delete all your messages everyone has users in the room. But we do not guarantee that the messages everyone has the participants in the room will be removed. But we guarantee that not a single message was sent to our servers.",
     "profile_settings": "Profile Settings",
     "your_login": "Your Login",
-    "files_support": "Supported file types: SVG, PNG, JPG, GIF, BMP"
+    "files_support": "Supported file types: {supported}"
   }
 }

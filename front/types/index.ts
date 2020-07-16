@@ -1,5 +1,6 @@
 export * from './user/user';
 export * from './user/credentials';
+export * from './user/editable-fields';
 
 export * from './room/room';
 

@@ -120,9 +120,51 @@ authRoutes.post('/register', Validators.postAuth, async (req: express.Request, r
 /**
  * Get current user
  */
-authRoutes.get('/me', authorization, async (req: express.Request & {user: UserDocument}, res: express.Response) => {
+authRoutes.get('/me', authorization, async (req: express.Request & { user: UserDocument }, res: express.Response) => {
   return res.json(req.user.getProfile());
 });
+
+/**
+ * Update current user
+ */
+authRoutes.patch(
+  '/me',
+  Validators.updateUser,
+  authorization,
+  async (req: express.Request & { user: UserDocument }, res: express.Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ code: 400, message: 'errors.validation_failed', errors: errors.array() });
+    }
+
+    if (req.body.login) {
+      req.user.login = req.body.login;
+    }
+
+    if (req.body.avatar) {
+      req.user.avatar = req.body.avatar;
+    }
+
+    try {
+      await req.user.save();
+      return res.json(req.user.getProfile());
+    } catch (e) {
+      if (e.name === 'MongoError' && e.code === 11000) {
+        return res.status(400).json({
+          code: 400,
+          message: 'errors.login_already_exist',
+          errors: [{
+            location: 'body',
+            msg: 'errors.login_already_exist',
+            param: 'login',
+          }],
+        });
+      }
+      console.error(e);
+      return res.status(500).json({ code: 500, message: 'errors.internal_error' });
+    }
+  },
+);
 
 /**
  * To check recaptcha code

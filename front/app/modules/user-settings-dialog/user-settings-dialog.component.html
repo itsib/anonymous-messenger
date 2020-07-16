@@ -19,14 +19,18 @@
 
         <mat-icon class="image-replacement" *ngIf="!form.get('avatar').value">account_circle</mat-icon>
 
-        <input type="file" class="file-input" (change)="changeFile($event)">
+        <input type="file" class="file-input" (change)="changeFile($event)" [accept]="getSupportedFiles()">
 
         <mat-icon class="upload-icon">cloud_upload</mat-icon>
 
       </div>
 
       <div class="text">
-        <span>{{ 'modals.files_support' | translate }}</span>
+        <span>{{ 'modals.files_support' | translate : {supported: supportedFiles.join(', ')} }}</span>
+        <span class="error" *ngIf="form.get('avatar').getError('type')">
+          {{ 'errors.unsupported_file_type' | translate : {supported: supportedFiles.join(', ')} }}
+        </span>
+        <span class="error" *ngIf="form.get('avatar').getError('api') as err">{{ err['msg'] }}</span>
       </div>
 
     </div>
@@ -38,13 +42,20 @@
 
       <input matInput formControlName="login">
 
+      <mat-error *ngIf="form.get('login').getError('required')">
+        <span>{{ 'errors.required_login' | translate }}</span>
+      </mat-error>
+      <mat-error *ngIf="form.get('login').getError('api') as err">
+        <span>{{ err['msg'] | translate }}</span>
+      </mat-error>
+
     </mat-form-field>
 
   </div>
 
   <div mat-dialog-actions class="modal-actions">
 
-    <button mat-button class="leave" cdkFocusInitial color="primary" (click)="save()">{{ 'common.save' | translate }}</button>
+    <button mat-button class="leave" cdkFocusInitial color="primary" (click)="save()" [class.loading]="form.loading">{{ 'common.save' | translate }}</button>
 
     <button mat-button class="cancel" (click)="cancel()" type="button">{{ 'common.cancel' | translate }}</button>
 

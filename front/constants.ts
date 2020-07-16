@@ -1,5 +1,4 @@
 
+export const MAX_AVATAR_SIZE = 70; // In px
 
-export const MAX_AVATAR_SIZE = 70;
-
-export const SUPPORTED_FILES = ['SVG', 'PNG', 'JPG', 'JPEG', 'GIF', 'BMP'];
+export const SUPPORTED_FILES = ['PNG', 'JPG', 'JPEG', 'GIF', 'BMP'];

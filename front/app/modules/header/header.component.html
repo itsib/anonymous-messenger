@@ -14,12 +14,13 @@
       <img src="assets/images/icons/logo.png">
     </div>
 
-    <div class="user" [matMenuTriggerFor]="userMenu">
+    <div class="user" [matMenuTriggerFor]="userMenu" *ngIf="userProvider.getMe() | async as user">
 
-      <span class="name">{{ (userProvider.getMe() | async)?.login }}</span>
+      <span class="name">{{ user.login }}</span>
 
       <div class="avatar">
-        <mat-icon aria-hidden="false" aria-label="User menu">account_circle</mat-icon>
+        <img [src]="user.avatar" *ngIf="user.avatar" />
+        <mat-icon aria-hidden="false" aria-label="User menu" *ngIf="!user.avatar">account_circle</mat-icon>
       </div>
 
     </div>

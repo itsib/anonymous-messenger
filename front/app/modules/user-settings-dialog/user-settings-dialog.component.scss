@@ -6,8 +6,6 @@
   .avatar-block {
     height: 90px;
     margin: 5px 0 30px;
-    padding: 1px;
-    border: 1px solid rgba(white, .3);
     border-radius: 5px;
     transition: all .2s ease-out;
     position: relative;
@@ -21,8 +19,8 @@
       font-size: 12px;
       color: rgba(white, .7);
       background-color: $color-fg;
-      transition: all .2s ease-out;
       position: absolute;
+      z-index: 2;
     }
 
     .avatar {
@@ -34,6 +32,7 @@
       border: 1px solid rgba(white, .3);
       position: relative;
       overflow: hidden;
+      z-index: 2;
 
       .image {
         left: 0;
@@ -86,11 +85,36 @@
     .text {
       margin-left: 20px;
       font-size: 14px;
+      position: relative;
+      z-index: 2;
+
+      .error {
+        margin-top: 10px;
+        font-size: 10px;
+        color: $color-warn;
+        display: block;
+      }
+    }
+
+    &:after {
+      content: " ";
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: block;
+      position: absolute;
+      border: 1px solid rgba(white, .3);
+      border-radius: 5px;
+      transition: all .2s ease-out;
+      z-index: 1;
     }
 
     &:hover {
-      //padding: 0;
-      //border: 2px solid white;
+
+      &:after {
+        border: 2px solid white;
+      }
     }
   }
 
