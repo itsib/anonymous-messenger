@@ -41,7 +41,7 @@
     "mongoose": "^5.9.21",
     "ng-recaptcha": "^5.0.0",
     "ngx-autosize": "^1.8.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "rxjs": "~6.5.4",
     "simple-peer": "^9.7.2",
     "socket.io": "^2.3.0",
